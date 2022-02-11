@@ -2,88 +2,93 @@
 #include "ATM.h"
 
 ATM::ATM() {
+    system("clear");
     this->menu();
 }
 
 ATM::ATM(ATMUser user) {
+    system("clear");
     this->createAccount(user);
     this->menu();
 }
 
 void ATM::menu() {
-    std::cout <<
-    "
-    ------------------------------------\n
-    1. Sign In
-    2. Create Account
-    3. Exit
-    ";
+    system("clear");
+    std::cout << "------------------------------------\n";
+    std::cout << "1. Sign In\n2. Create Account\n3. Exit\n";
     int res;
-    cin >> res;
+    std::cin >> res;
     switch(res) {
         case 1:
-            signIn();
+            system("clear");
+            this->signIn();
             break;
         case 2:
-            createAccount();
+            system("clear");
+            this->createAccount();
             break;
         case 3:
-            exit();
+            system("clear");
+            exit(0);
             break;
         default:
+            system("clear");
             std::cout << "Please try again\n";
+            this->menu();
+            break;
     }
-    system("clear");
 }
 
-void ATM::void subMenu() {
-    std::cout <<
-    "
-    ------------------------------------\n
-    1. Check Balance\n
-    2. Deposit\n
-    3. Withdraw\n
-    4. Account Information\n
-    5. Log Out\n
-    6. Exit\n
-    ";
+void ATM::subMenu() {
+    system("clear");
+    std::cout << "------------------------------------\n";
+    std::cout << "1. Check Balance\n2. Deposit\n3. Withdraw\n";
+    std::cout << "4. Account Information\n5. Log Out\n6. Exit\n";
     int res;
-    cin >> res;
+    std::cin >> res;
     switch(res) {
         case 1:
-            checkBalance();
+            system("clear");
+            this->checkBalance();
             break;
         case 2:
-            deposit();
+            system("clear");
+            this->deposit();
             break;
         case 3:
-            withdraw();
+            system("clear");
+            this->withdraw();
             break;
         case 4:
-            getInformation();
+            system("clear");
+            this->getInformation();
             break;
         case 5:
-            logOut();
+            system("clear");
+            this->logOut();
             break;
         case 6:
-            exit();
+            system("clear");
+            exit(0);
             break;
         default:
+            system("clear");
             std::cout << "Please try again\n";
+            this->subMenu();
             break;
     }
-    system("clear");
 }
 
 void ATM::signIn() {
+    system("clear");
     unsigned long int id;
     unsigned int pin;
     bool success = false;
 
     std::cout << "Enter your id number: ";
-    cin >> id;
+    std::cin >> id;
     std::cout << "Enter your pin: ";
-    cin >> pin;
+    std::cin >> pin;
 
     int index = 0;
     while (index < this->accounts.size()) {
@@ -94,45 +99,60 @@ void ATM::signIn() {
         ++index;
         index %= this->accounts.size() - 1;
     }
+    system("clear");
     if (success) this->subMenu();
     else this->signIn();
 }
 
 void ATM::createAccount() {
+    system("clear");
     std::srand(time(NULL));
     std::string name, phone;
     unsigned long int id = std::rand();
     unsigned int pin;
 
+    std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
     std::cout << "Enter your name: ";
-    cin >> name;
+    std::cin >> name;
     std::cout << "Enter your phone number: ";
-    cin >> phone;
+    std::cin >> phone;
     std::cout << "Enter your pin: ";
-    cin >> pin;
+    std::cin >> pin;
+
 
     ATMUser temp(name, phone, id, pin, 0);
-    this->accounts.add(temp);
+    this->accounts.push_back(temp);
+    system("clear");
+    this->menu();
+}
+
+void ATM::createAccount(ATMUser& user) {
+    this->accounts.push_back(user);
     system("clear");
     this->menu();
 }
 
 void ATM::getInformation(ATMUser& user) {
+    system("clear");
     std::cout << user;
 }
 
 void ATM::checkBalance(ATMUser& user) {
+    system("clear");
     std::cout << this->currentUser.getBalance() << std::endl;
 }
 
 void deposit(const unsigned long long int& money) {
+    system("clear");
     this->currentUser->setBalance(money);
 }
 
 void withdraw(const unsigned long long int& money) {
+    system("clear");
     this->currentUser->setBalance(money);
 }
 
 void logOut() {
+    system("clear");
     this->currentUser = NULL;
 }

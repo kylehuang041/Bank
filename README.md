@@ -7,7 +7,7 @@ Made using C++.<br><br>
 -Can access information and check balance.<br>
 
 ## Linux Instructions
-   * clone repository.<br>
+* clone repository.<br>
 -type "make && ./program" in terminal to compile and execute program.<br>
 -type "make clean" to remove object files.<br>
 

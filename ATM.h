@@ -25,7 +25,7 @@ class ATM {
 
     public:
         ATM();
-        ATM(ATMUser user);
+        ATM(ATMUser& user);
 };
 
 #endif

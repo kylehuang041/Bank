@@ -97,7 +97,6 @@ void ATM::signIn() {
             success = true;
         }
         ++index;
-        index %= this->accounts.size() - 1;
     }
     std::cout << "\033[2J\033[1;1H";
     if (success) this->subMenu();

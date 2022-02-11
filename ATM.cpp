@@ -29,7 +29,7 @@ void ATM::menu() {
             break;
         case 3:
             std::cout << "\033[2J\033[1;1H";
-            exit(0);
+            this->exitProgram();
             break;
         default:
             std::cout << "\033[2J\033[1;1H";
@@ -69,7 +69,7 @@ void ATM::subMenu() {
             break;
         case 6:
             std::cout << "\033[2J\033[1;1H";
-            exit(0);
+            this->exitProgram();
             break;
         default:
             std::cout << "\033[2J\033[1;1H";
@@ -80,7 +80,6 @@ void ATM::subMenu() {
 }
 
 void ATM::signIn() {
-    std::cout << "\033[2J\033[1;1H";
     unsigned long int id;
     unsigned int pin;
     bool success = false;
@@ -100,7 +99,10 @@ void ATM::signIn() {
     }
     std::cout << "\033[2J\033[1;1H";
     if (success) this->subMenu();
-    else this->signIn();
+    else {
+        std::cout << "Incorrect ID or pin. Please try again.\n";
+        this->signIn();
+    }
 }
 
 void ATM::createAccount() {
@@ -162,8 +164,9 @@ void ATM::logOut() {
     this->currentUser = NULL;
 }
 
-// void exit() {
-//     for (int i = 0; i < this->accounts->size(); i++) {
-//         delete this->accounts[i];
-//     }
-// }
+void ATM::exitProgram() {
+    for (int i = 0; i < this->accounts.size(); i++) {
+        delete this->accounts[i];
+    }
+    std::exit(0);
+}

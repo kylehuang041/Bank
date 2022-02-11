@@ -26,7 +26,7 @@ class ATM {
     public:
         ATM();
         ATM(ATMUser* user);
-        // friend void exit();
+        void exitProgram();
 };
 
 #endif

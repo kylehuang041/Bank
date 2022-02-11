@@ -11,12 +11,11 @@ class User {
 
     public:
         User(const std::string& name, const std::string& phone);
-        ~User();
-        virtual std::string& getName();
+        virtual ~User();
+        virtual std::string& getName() = 0;
         virtual void setName(const std::string& name);
         virtual std::string& getPhone();
         virtual void setPhone(const std::string& phone);
-        // friend std::ostream& operator << (std::ostream& toString, const User& user);
 };
 
 #endif

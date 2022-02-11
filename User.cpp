@@ -14,8 +14,3 @@ void User::setName(const std::string& name) { this->name = name; }
 std::string& User::getPhone() { return this->phone; }
 
 void User::setPhone(const std::string& phone) { this->phone = phone; }
-
-// std::ostream& operator << (std::ostream& toString, const User user) {
-//     toString << "name: " << user.name << "\nphone: " << user.phone << std::endl;
-//     return toString;
-// }

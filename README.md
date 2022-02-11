@@ -11,4 +11,4 @@
 * type "make clean" to remove object files.<br>
 
 ## Other
-I created the program using C++ and Linux for makefile
+I created the program using C++ and Linux for makefile.

@@ -10,12 +10,12 @@
 
 class ATM {
     // private:
-        std::vector<ATMUser> accounts;
+        std::vector<ATMUser*> accounts;
         ATMUser* currentUser;
         void menu();
         void signIn();
         void createAccount();
-        void createAccount(ATMUser& user);
+        void createAccount(ATMUser* user);
         void subMenu();
         void checkBalance();
         void deposit();
@@ -25,7 +25,8 @@ class ATM {
 
     public:
         ATM();
-        ATM(ATMUser& user);
+        ATM(ATMUser* user);
+        // friend void exit();
 };
 
 #endif

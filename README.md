@@ -1,2 +1,2 @@
 # Bank
-Using C++
+with C++.

@@ -120,7 +120,7 @@ void ATM::createAccount() {
     std::cout << "Enter your pin: ";
     std::cin >> pin;
 
-    ATMUser* temp = new ATMUser(name, phone, id, pin, 0);
+    ATMUser* temp = new ATMUser(name, phone, id, pin);
     this->accounts.push_back(temp);
     std::cout << "\033[2J\033[1;1H";
     this->menu();

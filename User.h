@@ -12,7 +12,7 @@ class User {
     public:
         User(const std::string& name, const std::string& phone);
         virtual ~User();
-        virtual std::string& getName() = 0;
+        virtual std::string& getName();
         virtual void setName(const std::string& name);
         virtual std::string& getPhone();
         virtual void setPhone(const std::string& phone);

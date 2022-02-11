@@ -140,7 +140,7 @@ void ATM::getInformation() {
 void ATM::checkBalance() {
     std::cout << "\033[2J\033[1;1H";
     std::cout << "Balance: " << this->currentUser->getBalance() << std::endl;
-    std::cout << "1. Back\n2. Exit";
+    std::cout << "1. Back\n2. Exit\n";
     int res;
     std::cin >> res;
     switch(res) {
@@ -154,25 +154,47 @@ void ATM::checkBalance() {
 }
 
 void ATM::deposit() {
-    unsigned long long int temp;
-    std::cout << "Enter the amount you want to deposit: ";
-    std::cin >> temp;
     std::cout << "\033[2J\033[1;1H";
+    long long int temp;
+    std::cout << "Enter deposit amount: ";
+    std::cin >> temp;
     this->currentUser->setBalance(temp);
+    std::cout << "1. Back\n2. Exit\n";
+    int res;
+    std::cin >> res;
+    switch(res) {
+        case 1:
+            this->subMenu();
+            break;
+        case 2:
+            this->exitProgram();
+            break;
+    }
 }
 
 void ATM::withdraw() {
     std::cout << "\033[2J\033[1;1H";
     long long int temp;
-    std::cout << "Enter the amount you want to withdraw: ";
+    std::cout << "Enter withdraw amount: ";
     std::cin >> temp;
-    std::cout << "\033[2J\033[1;1H";
     this->currentUser->setBalance(-temp);
+    std::cout << "1. Back\n2. Exit\n";
+    int res;
+    std::cin >> res;
+    switch(res) {
+        case 1:
+            this->subMenu();
+            break;
+        case 2:
+            this->exitProgram();
+            break;
+    }
 }
 
 void ATM::logOut() {
     std::cout << "\033[2J\033[1;1H";
     this->currentUser = NULL;
+    this->menu();
 }
 
 void ATM::exitProgram() {

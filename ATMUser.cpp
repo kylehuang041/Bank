@@ -18,7 +18,7 @@ void ATMUser::setPin(const unsigned int& pin) { this->pin = pin; }
 
 unsigned long long int& ATMUser::getBalance() { return this->balance; }
 
-void ATMUser::setBalance(const unsigned long long int& balance) { this->balance = balance; }
+void ATMUser::setBalance(const unsigned long long int& balance) { this->balance += balance; }
 
 std::ostream& operator << (std::ostream& toString, const ATMUser& ATMUser) {
     toString << "name: " << ATMUser.name << "\nphone: " << ATMUser.phone

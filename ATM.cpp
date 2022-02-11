@@ -6,7 +6,7 @@ ATM::ATM() {
     this->menu();
 }
 
-ATM::ATM(ATMUser& user) {
+ATM::ATM(ATMUser* user) {
     std::cout << "\033[2J\033[1;1H";
     this->createAccount(user);
     this->menu();
@@ -92,7 +92,7 @@ void ATM::signIn() {
 
     int index = 0;
     while (index < this->accounts.size()) {
-        if (this->accounts[index].getId() == id) {
+        if (this->accounts[index]->getId() == id && this->accounts[index]->getPin() == pin) {
             this->currentUser = this->accounts[index];
             success = true;
         }
@@ -119,14 +119,13 @@ void ATM::createAccount() {
     std::cout << "Enter your pin: ";
     std::cin >> pin;
 
-
-    ATMUser temp(name, phone, id, pin, 0);
+    ATMUser* temp = new ATMUser(name, phone, id, pin, 0);
     this->accounts.push_back(temp);
     std::cout << "\033[2J\033[1;1H";
     this->menu();
 }
 
-void ATM::createAccount(ATMUser& user) {
+void ATM::createAccount(ATMUser* user) {
     this->accounts.push_back(user);
     std::cout << "\033[2J\033[1;1H";
     this->menu();
@@ -163,3 +162,9 @@ void ATM::logOut() {
     std::cout << "\033[2J\033[1;1H";
     this->currentUser = NULL;
 }
+
+// void exit() {
+//     for (int i = 0; i < this->accounts->size(); i++) {
+//         delete this->accounts[i];
+//     }
+// }

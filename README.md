@@ -4,7 +4,7 @@ Made using C++.<br><br>
 -Make deposits and withdrawals.<br>
 -Can access information and check balance.<br>
 
-##Linux Instructions:
+## Linux Instructions:
 -clone repository.<br>
 -type "make && ./program" in terminal to compile and execute program.<br>
 -type "make clean" to remove object files.<br>

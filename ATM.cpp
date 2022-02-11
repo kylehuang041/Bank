@@ -139,7 +139,18 @@ void ATM::getInformation() {
 
 void ATM::checkBalance() {
     std::cout << "\033[2J\033[1;1H";
-    std::cout << this->currentUser->getBalance() << std::endl;
+    std::cout << "Balance: " << this->currentUser->getBalance() << std::endl;
+    std::cout << "1. Back\n2. Exit";
+    int res;
+    std::cin >> res;
+    switch(res) {
+        case 1:
+            this->subMenu();
+            break;
+        case 2:
+            this->exitProgram();
+            break;
+    }
 }
 
 void ATM::deposit() {

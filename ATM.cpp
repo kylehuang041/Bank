@@ -126,7 +126,7 @@ void ATM::createAccount() {
     this->menu();
 }
 
-void ATM::createAccount() {
+void ATM::createAccount(ATMUser& user) {
     this->accounts.push_back(user);
     std::cout << "\033[2J\033[1;1H";
     this->menu();

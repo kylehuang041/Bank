@@ -170,6 +170,7 @@ void ATM::logOut() {
 }
 
 void ATM::exitProgram() {
+    std::cout << "\033[2J\033[1;1H";
     for (int i = 0; i < this->accounts.size(); i++) {
         delete this->accounts[i];
     }

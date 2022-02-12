@@ -22,10 +22,13 @@ class ATM {
         void withdraw();
         void getInformation();
         void logOut();
+        void exitProgram();
+        void miniMenu1();
 
     public:
         ATM(ATMUser* user = NULL);
-        void exitProgram();
 };
+
+
 
 #endif

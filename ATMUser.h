@@ -19,7 +19,7 @@ class ATMUser : public User {
         unsigned int& getPin();
         void setPin(const unsigned int& pin);
         unsigned long long int& getBalance();
-        void setBalance(const unsigned long long int& balance);
+        void setBalance(const long long int& balance);
         friend std::ostream& operator << (std::ostream& toString, const ATMUser& ATMUser);
 };
 

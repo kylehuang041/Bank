@@ -79,7 +79,6 @@ void ATM::subMenu() {
 void ATM::signIn() {
     unsigned long int id;
     unsigned int pin;
-    bool success = false;
 
     std::cout << "Enter your id number: ";
     std::cin >> id;
@@ -103,29 +102,8 @@ void ATM::signIn() {
     this->signIn();
 }
 
-// void ATM::createAccount() {
-//     std::cout << "\033[2J\033[1;1H";
-//     std::srand(time(NULL));
-//     std::string name, phone;
-//     unsigned long int id = std::rand();
-//     unsigned int pin;
-
-//     std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
-//     std::cout << "Enter your name: ";
-//     std::cin >> name;
-//     std::cout << "Enter your phone number: ";
-//     std::cin >> phone;
-//     std::cout << "Enter your pin: ";
-//     std::cin >> pin;
-
-//     ATMUser* temp = new ATMUser(name, phone, id, pin);
-//     this->accounts.push_back(temp);
-//     std::cout << "\033[2J\033[1;1H";
-//     this->menu();
-// }
-
 void ATM::createAccount(ATMUser* user) {
-    if (user == NULL) {
+    if (user == nullptr) {
         std::cout << "\033[2J\033[1;1H";
         std::srand(time(NULL));
         std::string name, phone;
@@ -155,32 +133,14 @@ void ATM::getInformation() {
     std::cout << "\033[2J\033[1;1H";
     std::cout << *(this->currentUser) << std::endl;
     std::cout << "1. Back\n2. Exit\n";
-    int res;
-    std::cin >> res;
-    switch(res) {
-        case 1:
-            this->subMenu();
-            break;
-        case 2:
-            this->exitProgram();
-            break;
-    }
+    this->miniMenu1();
 }
 
 void ATM::checkBalance() {
     std::cout << "\033[2J\033[1;1H";
     std::cout << "Balance: " << this->currentUser->getBalance() << std::endl;
     std::cout << "1. Back\n2. Exit\n";
-    int res;
-    std::cin >> res;
-    switch(res) {
-        case 1:
-            this->subMenu();
-            break;
-        case 2:
-            this->exitProgram();
-            break;
-    }
+    this->miniMenu1();
 }
 
 void ATM::deposit() {
@@ -190,16 +150,7 @@ void ATM::deposit() {
     std::cin >> temp;
     this->currentUser->setBalance(temp);
     std::cout << "1. Back\n2. Exit\n";
-    int res;
-    std::cin >> res;
-    switch(res) {
-        case 1:
-            this->subMenu();
-            break;
-        case 2:
-            this->exitProgram();
-            break;
-    }
+    this->miniMenu1();
 }
 
 void ATM::withdraw() {
@@ -209,6 +160,23 @@ void ATM::withdraw() {
     std::cin >> temp;
     this->currentUser->setBalance(-temp);
     std::cout << "1. Back\n2. Exit\n";
+    this->miniMenu1();
+}
+
+void ATM::logOut() {
+    std::cout << "\033[2J\033[1;1H";
+    this->currentUser = nullptr;
+    this->menu();
+}
+
+void ATM::exitProgram() {
+    for (int i = 0; i < this->accounts.size(); i++) {
+        delete this->accounts[i];
+    }
+    std::exit(0);
+}
+
+void ATM::miniMenu1() {
     int res;
     std::cin >> res;
     switch(res) {
@@ -219,17 +187,4 @@ void ATM::withdraw() {
             this->exitProgram();
             break;
     }
-}
-
-void ATM::logOut() {
-    std::cout << "\033[2J\033[1;1H";
-    this->currentUser = NULL;
-    this->menu();
-}
-
-void ATM::exitProgram() {
-    for (int i = 0; i < this->accounts.size(); i++) {
-        delete this->accounts[i];
-    }
-    std::exit(0);
 }

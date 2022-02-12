@@ -14,8 +14,8 @@ class ATM {
         ATMUser* currentUser;
         void menu();
         void signIn();
-        void createAccount();
-        void createAccount(ATMUser* user);
+        // void createAccount();
+        void createAccount(ATMUser* user = NULL);
         void subMenu();
         void checkBalance();
         void deposit();

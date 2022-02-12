@@ -4,8 +4,8 @@
 // Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
 
 ATM::ATM(ATMUser* user) {
+    if (user != nullptr) this->createAccount(user);
     std::cout << "\033[2J\033[1;1H";
-    this->createAccount(user);
     this->menu();
 }
 
@@ -90,47 +90,65 @@ void ATM::signIn() {
     while (index < this->accounts.size()) {
         if (this->accounts[index]->getId() == id && this->accounts[index]->getPin() == pin) {
             this->currentUser = this->accounts[index];
-            success = true;
+            std::cout << "\033[2J\033[1;1H";
+            std::cout << "Hello " << this->accounts[index]->getName() << std::endl;
+            this->subMenu();
+            return;
         }
         ++index;
     }
 
-    if (success) {
-        std::cout << "\033[2J\033[1;1H";
-        std::cout << "Hello " << this->accounts[index]->getName() << std::endl;
-        this->subMenu();
-    } else {
-        std::cout << "\033[2J\033[1;1H";
-        std::cout << "Incorrect ID or pin. Please try again.\n";
-        this->signIn();
-    }
+    std::cout << "\033[2J\033[1;1H";
+    std::cout << "Incorrect ID or pin. Please try again.\n";
+    this->signIn();
 }
 
-void ATM::createAccount() {
-    std::cout << "\033[2J\033[1;1H";
-    std::srand(time(NULL));
-    std::string name, phone;
-    unsigned long int id = std::rand();
-    unsigned int pin;
+// void ATM::createAccount() {
+//     std::cout << "\033[2J\033[1;1H";
+//     std::srand(time(NULL));
+//     std::string name, phone;
+//     unsigned long int id = std::rand();
+//     unsigned int pin;
 
-    std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
-    std::cout << "Enter your name: ";
-    std::cin >> name;
-    std::cout << "Enter your phone number: ";
-    std::cin >> phone;
-    std::cout << "Enter your pin: ";
-    std::cin >> pin;
+//     std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
+//     std::cout << "Enter your name: ";
+//     std::cin >> name;
+//     std::cout << "Enter your phone number: ";
+//     std::cin >> phone;
+//     std::cout << "Enter your pin: ";
+//     std::cin >> pin;
 
-    ATMUser* temp = new ATMUser(name, phone, id, pin);
-    this->accounts.push_back(temp);
-    std::cout << "\033[2J\033[1;1H";
-    this->menu();
-}
+//     ATMUser* temp = new ATMUser(name, phone, id, pin);
+//     this->accounts.push_back(temp);
+//     std::cout << "\033[2J\033[1;1H";
+//     this->menu();
+// }
 
 void ATM::createAccount(ATMUser* user) {
-    this->accounts.push_back(user);
-    std::cout << "\033[2J\033[1;1H";
-    this->menu();
+    if (user == NULL) {
+        std::cout << "\033[2J\033[1;1H";
+        std::srand(time(NULL));
+        std::string name, phone;
+        unsigned long int id = std::rand();
+        unsigned int pin;
+
+        std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
+        std::cout << "Enter your name: ";
+        std::cin >> name;
+        std::cout << "Enter your phone number: ";
+        std::cin >> phone;
+        std::cout << "Enter your pin: ";
+        std::cin >> pin;
+
+        ATMUser* temp = new ATMUser(name, phone, id, pin);
+        this->accounts.push_back(temp);
+        std::cout << "\033[2J\033[1;1H";
+        this->menu();
+    } else {
+        this->accounts.push_back(user);
+        std::cout << "\033[2J\033[1;1H";
+        this->menu();
+    }
 }
 
 void ATM::getInformation() {

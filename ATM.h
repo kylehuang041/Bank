@@ -24,8 +24,7 @@ class ATM {
         void logOut();
 
     public:
-        ATM();
-        ATM(ATMUser* user);
+        ATM(ATMUser* user = NULL);
         void exitProgram();
 };
 

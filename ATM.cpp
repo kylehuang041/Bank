@@ -1,10 +1,7 @@
 #include <iostream>
 #include "ATM.h"
 
-ATM::ATM() {
-    std::cout << "\033[2J\033[1;1H";
-    this->menu();
-}
+// Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
 
 ATM::ATM(ATMUser* user) {
     std::cout << "\033[2J\033[1;1H";
@@ -97,9 +94,13 @@ void ATM::signIn() {
         }
         ++index;
     }
-    std::cout << "\033[2J\033[1;1H";
-    if (success) this->subMenu();
-    else {
+
+    if (success) {
+        std::cout << "\033[2J\033[1;1H";
+        std::cout << "Hello " << this->accounts[index]->getName() << std::endl;
+        this->subMenu();
+    } else {
+        std::cout << "\033[2J\033[1;1H";
         std::cout << "Incorrect ID or pin. Please try again.\n";
         this->signIn();
     }

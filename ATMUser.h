@@ -12,7 +12,7 @@ class ATMUser : public User {
         unsigned int pin;
 
     public:
-        ATMUser(const std::string& name, const std::string& phone, const unsigned long int& id, const unsigned int& pin, const unsigned long long int& balance = 0);
+        ATMUser(const std::string& name = "John", const std::string& phone = "0123456789", const unsigned long int& id = 12345678, const unsigned int& pin = 1234, const unsigned long long int& balance = 0);
         ~ATMUser();
         unsigned long int& getId();
         void setId(const unsigned long int& id);

@@ -3,14 +3,10 @@
 #include "ATM.h"
 using namespace std;
 
-void runATM();
-
 int main() {
-    runATM();
-}
+    ATM atm;
 
-void runATM() {
-    ATMUser* user = new ATMUser();
-    ATM atm(user);
-    delete user;
+    // ATMUser* user = new ATMUser("Bob", "1234252345", 12345678, 1234);
+    // ATM atm(user);
+    // delete user;
 }

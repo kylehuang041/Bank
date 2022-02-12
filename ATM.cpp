@@ -108,6 +108,7 @@ void ATM::createAccount(ATMUser* user) {
         std::srand(time(NULL));
         std::string name, phone;
         unsigned long int id = std::rand();
+        while (isDuplicateId(id)) id = std::rand();
         unsigned int pin;
 
         std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
@@ -188,4 +189,10 @@ void ATM::miniMenu1() {
             this->exitProgram();
             break;
     }
+}
+
+bool ATM::isDuplicateId(unsigned long int& id) {
+    for (int i = 0; i < this->accounts.size(); i++)
+        if (id == this->accounts[i]->getId()) return true;
+    return false;
 }

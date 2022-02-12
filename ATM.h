@@ -24,11 +24,10 @@ class ATM {
         void logOut();
         void exitProgram();
         void miniMenu1();
+        bool isDuplicateId(unsigned long int& id);
 
     public:
         ATM(ATMUser* user = NULL);
 };
-
-
 
 #endif

@@ -96,10 +96,19 @@ void ATM::signIn() {
         }
         ++index;
     }
+    this->tryAgainMenu();
+}
 
+void ATM::tryAgainMenu() {
     std::cout << "\033[2J\033[1;1H";
     std::cout << "Incorrect ID or pin. Please try again.\n";
-    this->signIn();
+    std::cout << "1. Try again\n2. Back\n";
+    int res;
+    std::cin >> res;
+    std::cout << "\033[2J\033[1;1H";
+    if (res == 1) this->signIn();
+    else if (res == 2) this->menu();
+    else tryAgainMenu();
 }
 
 void ATM::createAccount(ATMUser* user) {

@@ -15,7 +15,7 @@ class ATM {
         void menu();
         void signIn();
         // void createAccount();
-        void createAccount(ATMUser* user = NULL);
+        void createAccount(ATMUser* user = nullptr);
         void subMenu();
         void checkBalance();
         void deposit();
@@ -25,9 +25,11 @@ class ATM {
         void exitProgram();
         void miniMenu1();
         bool isDuplicateId(unsigned long int& id);
+        void tryAgainMenu();
 
     public:
-        ATM(ATMUser* user = NULL);
+        ATM(ATMUser* user = nullptr);
+        
 };
 
 #endif

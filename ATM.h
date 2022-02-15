@@ -33,5 +33,7 @@ class ATM {
 };
 
 void clearScreen();
+bool isNumber(const std::string& str); // source: https://www.delftstack.com/howto/cpp/how-to-determine-if-a-string-is-number-cpp/
+bool isFourDigit(unsigned int pin);
 
 #endif

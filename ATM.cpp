@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ATM.h"
+#include <string>
 
 // Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
 
@@ -122,17 +123,26 @@ void ATM::createAccount(ATMUser* user) {
         std::string name, phone;
         unsigned long int id = std::rand();
         while (isDuplicateId(id)) id = std::rand();
-        unsigned int pin;
+        std::string pin;
 
         std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
         std::cout << "Enter your name: ";
-        std::cin >> name;
+        while (std::cin >> name) {
+            if (!isNumber(name)) break;
+            else std::cout << "Enter letters only for name: ";
+        }
         std::cout << "Enter your phone number: ";
-        std::cin >> phone;
-        std::cout << "Enter your pin: ";
-        std::cin >> pin;
+        while (std::cin >> phone) {
+            if (isNumber(phone)) break;
+            else std::cout << "Enter only integers for phone number: ";
+        }
+        std::cout << "Enter your 4-digit number pin: ";
+        while (std::cin >> pin) {
+            if (isNumber(pin) && isFourDigit((unsigned int) pin)) break;
+            else std::cout << "Enter only 4 integers for pin number: ";
+        }
 
-        ATMUser* temp = new ATMUser(name, phone, id, pin);
+        ATMUser* temp = new ATMUser(name, phone, id, (unsigned int) pin);
         this->accounts.push_back(temp);
         clearScreen();
         this->menu();
@@ -227,6 +237,20 @@ bool ATM::isDuplicateId(unsigned long int& id) {
 
 void clearScreen() {
     std::cout << "\033[2J\033[1;1H";
+}
+
+// source: https://www.delftstack.com/howto/cpp/how-to-determine-if-a-string-is-number-cpp/
+bool isNumber(const std::string& str) {
+    return str.find_first_not_of("0123456789") == std::string::npos;
+}
+
+bool isFourDigit(unsigned int pin) {
+    int counter = 0;
+    while (pin > 0) {
+        pin /= 10;
+        ++counter;
+    }
+    return (counter == 4);
 }
 
 int ATM::numberOfUsers = 0;

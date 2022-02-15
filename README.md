@@ -5,7 +5,7 @@
 * Make deposits and withdrawals.<br>
 * Can access information and check balance.<br>
 
-## Windows/Linux Instructions
+## Windows/Linux Terminal Instructions
 * clone repository.<br>
 * type "make && ./program" in terminal to compile and execute program.<br>
 * type "make clean" to remove object files.<br>
@@ -13,4 +13,4 @@
 Just type in "./program"
 
 ## Other
-I created the program using C++ and Linux for makefile.
+I created the program using C++ and used Linux for makefile.

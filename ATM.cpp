@@ -138,11 +138,11 @@ void ATM::createAccount(ATMUser* user) {
         }
         std::cout << "Enter your 4-digit number pin: ";
         while (std::cin >> pin) {
-            if (isNumber(pin) && isFourDigit((unsigned int) pin)) break;
+            if (isNumber(pin) && isFourDigit(std::stoi(pin))) break;
             else std::cout << "Enter only 4 integers for pin number: ";
         }
 
-        ATMUser* temp = new ATMUser(name, phone, id, (unsigned int) pin);
+        ATMUser* temp = new ATMUser(name, phone, id, std::stoi(pin));
         this->accounts.push_back(temp);
         clearScreen();
         this->menu();

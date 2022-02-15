@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    // ATM atm;
+    ATM atm;
 
-    ATM atm(new ATMUser("Bob", "1234252345", 12345678, 1234));
+    // ATM atm(new ATMUser("Bob", "1234252345", 12345678, 1234));
 }

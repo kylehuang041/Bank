@@ -12,7 +12,7 @@ ATM::ATM(ATMUser* user) {
 void ATM::menu() {
     clearScreen();
     std::cout << "------------------------------------\n";
-    std::cout << "1. Sign In\n2. Create Account\n3. Check number of Users\n4. Exit\n";
+    std::cout << "1. Sign In\n2. Create Account\n3. Check number of users\n4. Exit\n";
     int res;
     std::cin >> res;
     switch(res) {
@@ -197,10 +197,6 @@ void ATM::getNumberOfUsers() {
     }
 }
 
-// void ATM::createUser(ATMUser* user) {
-//     this->accounts.push_back(user);
-// }
-
 void ATM::exitProgram() {
     clearScreen();
     for (int i = 0; i < this->accounts.size(); i++) {
@@ -234,4 +230,3 @@ void clearScreen() {
 }
 
 int ATM::numberOfUsers = 0;
-// std::vector<ATMUsers*> ATM::this->accounts;

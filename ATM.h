@@ -30,7 +30,6 @@ class ATM {
 
     public:
         ATM(ATMUser* user = nullptr);
-        // static void createUser(ATMUser* user);
 };
 
 void clearScreen();

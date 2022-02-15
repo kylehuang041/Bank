@@ -10,11 +10,11 @@
 
 class ATM {
     // private:
+        static int numberOfUsers;
         std::vector<ATMUser*> accounts;
         ATMUser* currentUser;
         void menu();
         void signIn();
-        // void createAccount();
         void createAccount(ATMUser* user = nullptr);
         void subMenu();
         void checkBalance();
@@ -26,10 +26,13 @@ class ATM {
         void miniMenu1();
         bool isDuplicateId(unsigned long int& id);
         void tryAgainMenu();
+        void getNumberOfUsers();
 
     public:
         ATM(ATMUser* user = nullptr);
-        
+        // static void createUser(ATMUser* user);
 };
+
+void clearScreen();
 
 #endif

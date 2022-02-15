@@ -5,31 +5,34 @@
 
 ATM::ATM(ATMUser* user) {
     if (user != nullptr) this->createAccount(user);
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     this->menu();
 }
 
 void ATM::menu() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     std::cout << "------------------------------------\n";
-    std::cout << "1. Sign In\n2. Create Account\n3. Exit\n";
+    std::cout << "1. Sign In\n2. Create Account\n3. Check number of Users\n4. Exit\n";
     int res;
     std::cin >> res;
     switch(res) {
         case 1:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->signIn();
             break;
         case 2:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->createAccount();
             break;
         case 3:
-            std::cout << "\033[2J\033[1;1H";
+            this->getNumberOfUsers();
+            break;
+        case 4:
+            clearScreen();
             this->exitProgram();
             break;
         default:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             std::cout << "Please try again\n";
             this->menu();
             break;
@@ -37,7 +40,7 @@ void ATM::menu() {
 }
 
 void ATM::subMenu() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     std::cout << "------------------------------------\n";
     std::cout << "1. Check Balance\n2. Deposit\n3. Withdraw\n";
     std::cout << "4. Account Information\n5. Log Out\n6. Exit\n";
@@ -45,31 +48,31 @@ void ATM::subMenu() {
     std::cin >> res;
     switch(res) {
         case 1:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->checkBalance();
             break;
         case 2:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->deposit();
             break;
         case 3:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->withdraw();
             break;
         case 4:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->getInformation();
             break;
         case 5:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->logOut();
             break;
         case 6:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             this->exitProgram();
             break;
         default:
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             std::cout << "Please try again\n";
             this->subMenu();
             break;
@@ -89,7 +92,7 @@ void ATM::signIn() {
     while (index < this->accounts.size()) {
         if (this->accounts[index]->getId() == id && this->accounts[index]->getPin() == pin) {
             this->currentUser = this->accounts[index];
-            std::cout << "\033[2J\033[1;1H";
+            clearScreen();
             std::cout << "Hello " << this->accounts[index]->getName() << std::endl;
             this->subMenu();
             return;
@@ -100,20 +103,21 @@ void ATM::signIn() {
 }
 
 void ATM::tryAgainMenu() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     std::cout << "Incorrect ID or pin. Please try again.\n";
     std::cout << "1. Try again\n2. Back\n";
     int res;
     std::cin >> res;
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     if (res == 1) this->signIn();
     else if (res == 2) this->menu();
     else tryAgainMenu();
 }
 
 void ATM::createAccount(ATMUser* user) {
+    ++numberOfUsers;
     if (user == nullptr) {
-        std::cout << "\033[2J\033[1;1H";
+        clearScreen();
         std::srand(time(NULL));
         std::string name, phone;
         unsigned long int id = std::rand();
@@ -130,57 +134,75 @@ void ATM::createAccount(ATMUser* user) {
 
         ATMUser* temp = new ATMUser(name, phone, id, pin);
         this->accounts.push_back(temp);
-        std::cout << "\033[2J\033[1;1H";
+        clearScreen();
         this->menu();
     } else {
         this->accounts.push_back(user);
-        std::cout << "\033[2J\033[1;1H";
+        clearScreen();
         this->menu();
     }
 }
 
 void ATM::getInformation() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     std::cout << *(this->currentUser) << std::endl;
-    std::cout << "1. Back\n2. Exit\n";
     this->miniMenu1();
 }
 
 void ATM::checkBalance() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     std::cout << "Balance: " << this->currentUser->getBalance() << std::endl;
-    std::cout << "1. Back\n2. Exit\n";
     this->miniMenu1();
 }
 
 void ATM::deposit() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     long long int temp;
     std::cout << "Enter deposit amount: ";
     std::cin >> temp;
     this->currentUser->setBalance(temp);
-    std::cout << "1. Back\n2. Exit\n";
     this->miniMenu1();
 }
 
 void ATM::withdraw() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     long long int temp;
     std::cout << "Enter withdraw amount: ";
     std::cin >> temp;
     this->currentUser->setBalance(-temp);
-    std::cout << "1. Back\n2. Exit\n";
     this->miniMenu1();
 }
 
 void ATM::logOut() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     this->currentUser = nullptr;
     this->menu();
 }
 
+void ATM::getNumberOfUsers() {
+    clearScreen();
+    std::cout << "Number of users: " << numberOfUsers << std::endl;
+    std::cout << "1. Back\n2. Exit\n";
+    int res;
+    std::cin >> res;
+    switch(res) {
+        case 1:
+            clearScreen();
+            this->menu();
+            break;
+        case 2:
+            clearScreen();
+            this->exitProgram();
+            break;
+    }
+}
+
+// void ATM::createUser(ATMUser* user) {
+//     this->accounts.push_back(user);
+// }
+
 void ATM::exitProgram() {
-    std::cout << "\033[2J\033[1;1H";
+    clearScreen();
     for (int i = 0; i < this->accounts.size(); i++) {
         delete this->accounts[i];
     }
@@ -188,6 +210,7 @@ void ATM::exitProgram() {
 }
 
 void ATM::miniMenu1() {
+    std::cout << "1. Back\n2. Exit\n";
     int res;
     std::cin >> res;
     switch(res) {
@@ -205,3 +228,10 @@ bool ATM::isDuplicateId(unsigned long int& id) {
         if (id == this->accounts[i]->getId()) return true;
     return false;
 }
+
+void clearScreen() {
+    std::cout << "\033[2J\033[1;1H";
+}
+
+int ATM::numberOfUsers = 0;
+// std::vector<ATMUsers*> ATM::this->accounts;

@@ -4,9 +4,7 @@
 using namespace std;
 
 int main() {
-    ATM atm;
+    // ATM atm;
 
-    // ATMUser* user = new ATMUser("Bob", "1234252345", 12345678, 1234);
-    // ATM atm(user);
-    // delete user;
+    ATM atm(new ATMUser("Bob", "1234252345", 12345678, 1234));
 }

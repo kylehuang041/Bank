@@ -1,6 +1,7 @@
 #include "ATMUser.h"
+#include <cmath>
 
-ATMUser::ATMUser(const std::string& name, const std::string& phone, const unsigned long int& id, const unsigned int& pin, const unsigned long long int& balance) : User(name, phone) {
+ATMUser::ATMUser(const std::string& name, const std::string& phone, const unsigned long int& id, const unsigned int& pin, const long double& balance) : User(name, phone) {
     this->id = id;
     this->pin = pin;
     this->balance = balance;
@@ -16,10 +17,10 @@ unsigned int& ATMUser::getPin() { return this->pin; }
 
 void ATMUser::setPin(const unsigned int& pin) { this->pin = pin; }
 
-unsigned long long int& ATMUser::getBalance() { return this->balance; }
+long double& ATMUser::getBalance() { return this->balance; }
 
-void ATMUser::setBalance(const long long int& balance) {
-    long long int temp = this->balance + balance;
+void ATMUser::setBalance(const long double& balance) {
+    long long int temp = (std::ceil(this->balance + balance) * 100) / 100;
     if (temp < 0) {
         std::cout << "Not enough money\n";
         return;

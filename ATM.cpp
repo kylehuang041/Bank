@@ -167,7 +167,7 @@ void ATM::checkBalance() {
 
 void ATM::deposit() {
     clearScreen();
-    long long int temp;
+    long double temp;
     std::cout << "Enter deposit amount: ";
     std::cin >> temp;
     this->currentUser->setBalance(temp);
@@ -176,7 +176,7 @@ void ATM::deposit() {
 
 void ATM::withdraw() {
     clearScreen();
-    long long int temp;
+    long double temp;
     std::cout << "Enter withdraw amount: ";
     std::cin >> temp;
     this->currentUser->setBalance(-temp);

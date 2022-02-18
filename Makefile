@@ -14,4 +14,4 @@ ATM.o: ATM.cpp
 	g++ -c ATM.cpp
 
 clean:
-	rm *.o program
+	rm *.o

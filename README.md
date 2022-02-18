@@ -6,11 +6,12 @@
 * Can access information and check balance.<br>
 
 ## Windows/Linux Terminal Instructions
+Both Linux and Windows:
 * clone repository.<br>
-* type "make && ./program" in terminal to compile and execute program.<br>
+* Type ./program in terminal to run the program.
+LINUX, if there is an error:
+* type "make && ./program" in terminal to recompile and execute program.<br>
 * type "make clean" to remove object files.<br>
-* [Windows] Well just in case, I already made the executable file called "program."<br>
-Just type in "./program"
 
 ## Other
 I created the program using C++ and used Linux for makefile.

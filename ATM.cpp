@@ -43,8 +43,8 @@ void ATM::menu() {
 void ATM::subMenu() {
     clearScreen();
     std::cout << "------------------------------------\n";
-    std::cout << "1. Check Balance\n2. Deposit\n3. Withdraw\n";
-    std::cout << "4. Account Information\n5. Log Out\n6. Exit\n";
+    std::cout << "1. Balance\n2. Account Summary\n3. Deposit\n4. Withdraw\n";
+    std::cout << "5. Account Information\n6. Log Out\n7. Exit\n";
     int res;
     std::cin >> res;
     switch(res) {
@@ -54,21 +54,26 @@ void ATM::subMenu() {
             break;
         case 2:
             clearScreen();
-            this->deposit();
+            this->currentUser->readSummary();
+            this->miniMenu1();
             break;
         case 3:
             clearScreen();
-            this->withdraw();
+            this->deposit();
             break;
         case 4:
             clearScreen();
-            this->getInformation();
+            this->withdraw();
             break;
         case 5:
             clearScreen();
-            this->logOut();
+            this->getInformation();
             break;
         case 6:
+            clearScreen();
+            this->logOut();
+            break;
+        case 7:
             clearScreen();
             this->exitProgram();
             break;
@@ -161,6 +166,10 @@ void ATM::getInformation() {
 
 void ATM::checkBalance() {
     clearScreen();
+    if (this->currentUser == nullptr) {
+        std::cout << "Error: undefined reference from currentUser\n";
+        return;
+    }
     std::cout << "Balance: " << this->currentUser->getBalance() << std::endl;
     this->miniMenu1();
 }

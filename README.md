@@ -9,7 +9,9 @@
 Both Linux and Windows:
 * clone repository.<br>
 * Type ./program in terminal to run the program.<br>
-LINUX, if there is an error:<br>
+
+LINUX, if there is an error:
+<br>
 * type "make && ./program" in terminal to recompile and execute program.<br>
 * type "make clean" to remove object files.<br>
 

@@ -221,6 +221,7 @@ void ATM::exitProgram() {
     for (int i = 0; i < this->accounts.size(); i++) {
         delete this->accounts[i];
     }
+    delete this->currentUser;
     std::exit(0);
 }
 

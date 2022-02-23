@@ -242,6 +242,7 @@ void ATM::exitProgram() {
     clearScreen();
     for (int i = 0; i < this->accounts.size(); i++) {
         delete this->accounts[i];
+        this->accounts[i] = nullptr;
     }
     this->accounts.clear();
     std::exit(0);

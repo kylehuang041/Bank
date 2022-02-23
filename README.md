@@ -5,12 +5,12 @@
 * Make deposits and withdrawals.<br>
 * Can access information and check balance.<br>
 
-## Windows/Linux Terminal Instructions
+## Linux Terminal Instructions
 Both Linux and Windows:
 * clone repository.<br>
 * Type ./program to run the program.<br>
 
-Linux (if there is an error):
+If there is an error:
 <br>
 * type "make && ./program" to recompile and execute program.<br>
 * type "make clean" to remove all object files.<br>

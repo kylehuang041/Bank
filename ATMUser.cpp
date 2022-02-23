@@ -20,7 +20,7 @@ void ATMUser::setPin(const unsigned int& pin) { this->pin = pin; }
 
 std::string ATMUser::getBalance() {
     std::string temp = std::to_string(this->balance);
-    if (temp.find(".")) temp = temp.substr(0, temp.find(".") + 3);
+    if (temp.find(".")) temp = '$' + temp.substr(0, temp.find(".") + 3);
     return temp;
 }
 
@@ -30,17 +30,16 @@ void ATMUser::setBalance(const long double& balance) {
     if (temp < 0) {
         std::cout << "Not enough money\n";
         return;
-    }
-    this->balance += balance;
-    if (negative) this->summary.push_back("Withdrew: " + std::to_string(this->balance));
-    else this->summary.push_back("Deposited: " + std::to_string(this->balance));
+    } else this->balance = temp;
+    if (negative) this->summary.push_back("-$" + std::to_string(-balance));
+    else this->summary.push_back("+$" + std::to_string(balance));
 }
 
 void ATMUser::readSummary() {
     std::cout << "======Account Summary======\n";
     for (int i = 0; i < this->summary.size(); i++) {
         std::string temp = this->summary[i];
-        if (temp.find(".")) temp = temp.substr(0, temp.find(".") + 3);
+        if (temp.find(".")) temp = temp.substr(0, temp.find('.') + 3);
         std::cout << temp << std::endl;
     }
     std::cout << "===========================\n";
@@ -48,8 +47,8 @@ void ATMUser::readSummary() {
 
 std::ostream& operator << (std::ostream& toString, const ATMUser& ATMUser) {
     toString << "name: " << ATMUser.name << "\nphone: " << ATMUser.phone
-    << "\nid: " << ATMUser.id << "\nphone: " << ATMUser.pin << "\nbalance: "
-    /*<< ATMUser.balance*/ << std::endl;
+    << "\nid: " << ATMUser.id << "\npin: " << ATMUser.pin/* << "\nbalance: "
+    << ATMUser.balance*/ << std::endl;
     return toString;
 }
 

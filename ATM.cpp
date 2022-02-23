@@ -2,8 +2,6 @@
 #include "ATM.h"
 #include <string>
 
-// Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
-
 ATM::ATM(ATMUser* user) {
     if (user != nullptr) this->createAccount(user);
     clearScreen();
@@ -14,7 +12,7 @@ void ATM::menu() {
     clearScreen();
     std::cout << "------------------------------------\n";
     std::cout << "1. Sign In\n2. Create Account\n3. Check number of users\n4. Exit\n";
-    int res;
+    int res{};
     std::cin >> res;
     switch(res) {
         case 1:
@@ -45,7 +43,7 @@ void ATM::subMenu() {
     std::cout << "------------------------------------\n";
     std::cout << "1. Balance\n2. Account Summary\n3. Deposit\n4. Withdraw\n";
     std::cout << "5. Account Information\n6. Log Out\n7. Exit\n";
-    int res;
+    int res{};
     std::cin >> res;
     switch(res) {
         case 1:
@@ -86,8 +84,8 @@ void ATM::subMenu() {
 }
 
 void ATM::signIn() {
-    unsigned long int id;
-    unsigned int pin;
+    unsigned long int id{};
+    unsigned int pin{};
 
     std::cout << "Enter your id number: ";
     std::cin >> id;
@@ -112,7 +110,7 @@ void ATM::tryAgainMenu() {
     clearScreen();
     std::cout << "Incorrect ID or pin. Please try again.\n";
     std::cout << "1. Try again\n2. Back\n";
-    int res;
+    int res{};
     std::cin >> res;
     clearScreen();
     if (res == 1) this->signIn();
@@ -125,10 +123,10 @@ void ATM::createAccount(ATMUser* user) {
     if (user == nullptr) {
         clearScreen();
         std::srand(time(NULL));
-        std::string name, phone;
+        std::string name{}, phone{};
         unsigned long int id = std::rand();
         while (isDuplicateId(id)) id = std::rand();
-        std::string pin;
+        std::string pin{};
 
         std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
         std::cout << "Enter your name: ";
@@ -160,7 +158,11 @@ void ATM::createAccount(ATMUser* user) {
 
 void ATM::getInformation() {
     clearScreen();
-    std::cout << *(this->currentUser) << std::endl;
+    try {
+        std::cout << *(this->currentUser) << std::endl;
+    } catch (...) {
+        std::cout << "Error: currentUser is NULL\n";
+    }
     this->miniMenu1();
 }
 
@@ -176,7 +178,7 @@ void ATM::checkBalance() {
 
 void ATM::deposit() {
     clearScreen();
-    long double temp;
+    long double temp{};
     std::cout << "Enter deposit amount: ";
     std::cin >> temp;
     this->currentUser->setBalance(temp);
@@ -185,7 +187,7 @@ void ATM::deposit() {
 
 void ATM::withdraw() {
     clearScreen();
-    long double temp;
+    long double temp{};
     std::cout << "Enter withdraw amount: ";
     std::cin >> temp;
     this->currentUser->setBalance(-temp);
@@ -194,7 +196,7 @@ void ATM::withdraw() {
 
 void ATM::logOut() {
     clearScreen();
-    this->currentUser = nullptr;
+    if (this->currentUser != nullptr) this->currentUser = nullptr;
     this->menu();
 }
 
@@ -202,7 +204,7 @@ void ATM::getNumberOfUsers() {
     clearScreen();
     std::cout << "Number of users: " << numberOfUsers << std::endl;
     std::cout << "1. Back\n2. Exit\n";
-    int res;
+    int res{};
     std::cin >> res;
     switch(res) {
         case 1:
@@ -216,18 +218,9 @@ void ATM::getNumberOfUsers() {
     }
 }
 
-void ATM::exitProgram() {
-    clearScreen();
-    for (int i = 0; i < this->accounts.size(); i++) {
-        delete this->accounts[i];
-    }
-    delete this->currentUser;
-    std::exit(0);
-}
-
 void ATM::miniMenu1() {
     std::cout << "1. Back\n2. Exit\n";
-    int res;
+    int res{};
     std::cin >> res;
     switch(res) {
         case 1:
@@ -239,13 +232,23 @@ void ATM::miniMenu1() {
     }
 }
 
-bool ATM::isDuplicateId(unsigned long int& id) {
-    for (int i = 0; i < this->accounts.size(); i++)
+bool ATM::isDuplicateId(const unsigned long int& id) {
+    for (int i = 0; i < this->accounts.size(); ++i)
         if (id == this->accounts[i]->getId()) return true;
     return false;
 }
 
+void ATM::exitProgram() {
+    clearScreen();
+    for (int i = 0; i < this->accounts.size(); i++) {
+        delete this->accounts[i];
+    }
+    this->accounts.clear();
+    std::exit(0);
+}
+
 void clearScreen() {
+    // Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
     std::cout << "\033[2J\033[1;1H";
 }
 

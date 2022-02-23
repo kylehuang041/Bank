@@ -24,7 +24,7 @@ class ATM {
         void logOut();
         void exitProgram();
         void miniMenu1();
-        bool isDuplicateId(unsigned long int& id);
+        bool isDuplicateId(const unsigned long int& id);
         void tryAgainMenu();
         void getNumberOfUsers();
 

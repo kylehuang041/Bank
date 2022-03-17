@@ -12,4 +12,4 @@
 * type "make clean" to remove all object files.<br>
 
 ## Other
-I created the program using C++ and used Linux for makefile.
+I created the program using C++ and made a makefile for multicompilation.

@@ -10,6 +10,7 @@
 * Type ./program to run the program.<br>
 * type "make && ./program" to recompile and execute program if there is an error.<br>
 * type "make clean" to remove all object files.<br>
+Note: Make sure to have g++ v11 in WSL or any Linux Distribution.
 
 ## Other
 I created the program using C++ and made a makefile for multicompilation.

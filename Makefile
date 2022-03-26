@@ -1,17 +1,17 @@
 program: Main.o User.o ATMUser.o ATM.o
-	g++ Main.o User.o ATMUser.o ATM.o -o program
+	g++-11 Main.o User.o ATMUser.o ATM.o -o program
 
 Main.o: Main.cpp
-	g++ -c Main.cpp
+	g++-11 -c Main.cpp
 
 User.o: User.cpp
-	g++ -c User.cpp
+	g++-11 -c User.cpp
 
 ATMUser.o: ATMUser.cpp
-	g++ -c ATMUser.cpp
+	g++-11 -c ATMUser.cpp
 
 ATM.o: ATM.cpp
-	g++ -c ATM.cpp
+	g++-11 -c ATM.cpp
 
 clean:
 	rm *.o

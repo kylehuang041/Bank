@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    ATM atm;
-
-    // ATM atm(new ATMUser("Bob", "1234252345", 12345678, 1234));
+    ATMUser user1;
+    ATMUser* p_user1 = &user1;
+    ATM atm(p_user1);
 }

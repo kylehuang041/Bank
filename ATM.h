@@ -11,7 +11,7 @@
 class ATM {
     // private:
         static int numberOfUsers;
-        std::vector<ATMUser*> accounts;
+        static std::vector<ATMUser*> accounts;
         ATMUser* currentUser;
         void menu();
         void signIn();

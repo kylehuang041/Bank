@@ -145,8 +145,9 @@ void ATM::createAccount(ATMUser* user) {
             else std::cout << "Enter only 4 integers for pin number: ";
         }
 
-        ATMUser* temp = new ATMUser(name, phone, id, std::stoi(pin));
-        this->accounts.push_back(temp);
+        ATMUser temp(name, phone, id, std::stoi(pin));
+        ATMUser* p_temp = &temp;
+        this->accounts.push_back(p_temp);
         clearScreen();
         this->menu();
     } else {
@@ -240,10 +241,10 @@ bool ATM::isDuplicateId(const unsigned long int& id) {
 
 void ATM::exitProgram() {
     clearScreen();
-    for (int i = 0; i < this->accounts.size(); i++) {
-        delete this->accounts[i];
-        this->accounts[i] = nullptr;
-    }
+    // for (int i = 0; i < this->accounts.size(); i++) {
+        // delete this->accounts[i];
+        // this->accounts[i] = nullptr;
+    // }
     this->accounts.clear();
     std::exit(0);
 }
@@ -268,3 +269,4 @@ bool isFourDigit(unsigned int pin) {
 }
 
 int ATM::numberOfUsers = 0;
+std::vector<ATMUser*> ATM::accounts {};

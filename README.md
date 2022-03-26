@@ -6,12 +6,12 @@
 * Can access information and check balance.<br>
 
 ## Linux Terminal Instructions
+<b>Note: Make sure to have g++-11 in WSL or any Linux Distribution.<br>
+g++-11 Installation: https://lindevs.com/install-g-on-ubuntu</b>
 * clone repository.<br>
 * Type ./program to run the program.<br>
 * type "make && ./program" to recompile and execute program if there is an error.<br>
 * type "make clean" to remove all object files.<br>
-Note: Make sure to have g++-11 in WSL or any Linux Distribution.  
-g++-11 Installation: https://lindevs.com/install-g-on-ubuntu
 
 ## Other
 I created the program using C++ and made a makefile for multicompilation.

@@ -6,7 +6,7 @@
 * Can access information and check balance.<br>
 
 ## Linux Terminal Instructions
-<b>Note: I used Ubuntu 20.0.4 LTS (WSL) and g++-11<br>
+<b>Note: I used Ubuntu (WSL) and g++-11<br>
 g++-11 Installation: https://lindevs.com/install-g-on-ubuntu</b>
 
 * clone repository.<br>

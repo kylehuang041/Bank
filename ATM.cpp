@@ -1,9 +1,22 @@
-#include <iostream>
 #include "ATM.h"
-#include <string>
 
-ATM::ATM(ATMUser* user) {
-    if (user != nullptr) this->createAccount(user);
+// ATM::ATM(ATMUser* user) {
+//     if (user != nullptr) this->createAccount(user);
+//     clearScreen();
+//     this->menu();
+// }
+
+ATM::ATM(ATMUser* s, ...) {
+    va_list list;
+    va_start(list, s);
+
+    while (s) {
+        this->createAccount(s);
+        // std::cout << "s: " << *s << std::endl << "\n";
+        s = va_arg(list, ATMUser*);
+    }
+
+    va_end(list);
     clearScreen();
     this->menu();
 }
@@ -145,16 +158,14 @@ void ATM::createAccount(ATMUser* user) {
             else std::cout << "Enter only 4 integers for pin number: ";
         }
 
-        ATMUser temp(name, phone, id, std::stoi(pin));
-        ATMUser* p_temp = &temp;
-        this->accounts.push_back(p_temp);
+        // ATMUser newUser(name, phone, id, std::stoi(pin));
+        // ATMUser* p_newUser = &newUser;
+        // this->accounts.push_back(p_newUser);
+        ATMUser* newUser = new ATMUser(name, phone, id, std::stoi(pin));
+        this->accounts.push_back(newUser);
         clearScreen();
         this->menu();
-    } else {
-        this->accounts.push_back(user);
-        clearScreen();
-        this->menu();
-    }
+    } else this->accounts.push_back(user);
 }
 
 void ATM::getInformation() {
@@ -241,10 +252,10 @@ bool ATM::isDuplicateId(const unsigned long int& id) {
 
 void ATM::exitProgram() {
     clearScreen();
-    // for (int i = 0; i < this->accounts.size(); i++) {
-        // delete this->accounts[i];
-        // this->accounts[i] = nullptr;
-    // }
+    for (int i = 0; i < this->accounts.size(); i++) {
+        delete this->accounts[i];
+        this->accounts[i] = nullptr;
+    }
     this->accounts.clear();
     std::exit(0);
 }

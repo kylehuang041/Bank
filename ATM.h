@@ -4,9 +4,11 @@
 
 #include <iostream>
 #include <vector>
+#include <ctime>
+#include <string>
+#include <cstdarg>
 #include "User.h"
 #include "ATMUser.h"
-#include <ctime>
 
 class ATM {
     // private:
@@ -29,7 +31,8 @@ class ATM {
         void getNumberOfUsers();
 
     public:
-        ATM(ATMUser* user = nullptr);
+        // ATM(ATMUser* user = nullptr);
+        ATM(ATMUser* s, ...);
 };
 
 void clearScreen();

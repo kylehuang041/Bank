@@ -1,11 +1,5 @@
 #include "ATM.h"
 
-// ATM::ATM(ATMUser* user) {
-//     if (user != nullptr) this->createAccount(user);
-//     clearScreen();
-//     this->menu();
-// }
-
 ATM::ATM(ATMUser* s, ...) {
     va_list list;
     va_start(list, s);
@@ -20,6 +14,14 @@ ATM::ATM(ATMUser* s, ...) {
     clearScreen();
     this->menu();
 }
+
+ATM::~ATM() {
+    this->exitProgram();
+    std::cout << "destructor\n";
+}
+
+
+// Main Functions
 
 void ATM::menu() {
     clearScreen();
@@ -97,8 +99,8 @@ void ATM::subMenu() {
 }
 
 void ATM::signIn() {
-    unsigned long int id{};
-    unsigned int pin{};
+    std::string id{};
+    std::string pin{};
 
     std::cout << "Enter your id number: ";
     std::cin >> id;
@@ -107,7 +109,7 @@ void ATM::signIn() {
 
     int index = 0;
     while (index < this->accounts.size()) {
-        if (this->accounts[index]->getId() == id && this->accounts[index]->getPin() == pin) {
+        if ((this->accounts[index]->getId().compare(id) == 0) && this->accounts[index]->getPin() == pin) {
             this->currentUser = this->accounts[index];
             clearScreen();
             std::cout << "Hello " << this->accounts[index]->getName() << std::endl;
@@ -135,10 +137,9 @@ void ATM::createAccount(ATMUser* user) {
     ++numberOfUsers;
     if (user == nullptr) {
         clearScreen();
-        std::srand(time(NULL));
         std::string name{}, phone{};
-        unsigned long int id = std::rand();
-        while (isDuplicateId(id)) id = std::rand();
+        std::string id = this->createRandomID();
+        while (isDuplicateId(id)) id = this->createRandomID();
         std::string pin{};
 
         std::cout << "Your ID number (DON'T FORGET!): " << id << std::endl;
@@ -158,14 +159,26 @@ void ATM::createAccount(ATMUser* user) {
             else std::cout << "Enter only 4 integers for pin number: ";
         }
 
-        // ATMUser newUser(name, phone, id, std::stoi(pin));
-        // ATMUser* p_newUser = &newUser;
-        // this->accounts.push_back(p_newUser);
-        ATMUser* newUser = new ATMUser(name, phone, id, std::stoi(pin));
+        ATMUser* newUser = new ATMUser(name, phone, id, pin);
         this->accounts.push_back(newUser);
         clearScreen();
         this->menu();
-    } else this->accounts.push_back(user);
+    } else {
+        bool duplicate = false;
+        std::string newID {};
+        while (isDuplicateId(user->getId())) {
+            duplicate = true;
+            newID = this->createRandomID();
+            user->setId(newID);
+        }
+        if (duplicate) {
+            std::cout << "Duplicate ID error: here is a new ID (DON'T FORGET): "
+            << newID << " for " << user->getName() << std::endl;
+            std::cout << "Press Enter to continue\n";
+            std::cin.ignore();
+        }
+        this->accounts.push_back(user);
+    }
 }
 
 void ATM::getInformation() {
@@ -206,12 +219,6 @@ void ATM::withdraw() {
     this->miniMenu1();
 }
 
-void ATM::logOut() {
-    clearScreen();
-    if (this->currentUser != nullptr) this->currentUser = nullptr;
-    this->menu();
-}
-
 void ATM::getNumberOfUsers() {
     clearScreen();
     std::cout << "Number of users: " << numberOfUsers << std::endl;
@@ -230,6 +237,29 @@ void ATM::getNumberOfUsers() {
     }
 }
 
+// Helper Functions
+
+// Source: https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
+std::string ATM::createRandomID() {
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(0,9);
+    std::uniform_int_distribution<std::mt19937::result_type> dist6v2(8, 11);
+
+    std::string randomID {};
+    int length = dist6v2(rng);
+    for (int i = 0; i < length; i++) {
+        randomID += std::to_string(dist6(rng));
+    }
+    return randomID;
+}
+
+void ATM::logOut() {
+    clearScreen();
+    if (this->currentUser != nullptr) this->currentUser = nullptr;
+    this->menu();
+}
+
 void ATM::miniMenu1() {
     std::cout << "1. Back\n2. Exit\n";
     int res{};
@@ -244,9 +274,9 @@ void ATM::miniMenu1() {
     }
 }
 
-bool ATM::isDuplicateId(const unsigned long int& id) {
+bool ATM::isDuplicateId(const std::string& id) {
     for (int i = 0; i < this->accounts.size(); ++i)
-        if (id == this->accounts[i]->getId()) return true;
+        if (id.compare(this->accounts[i]->getId()) == 0) return true;
     return false;
 }
 
@@ -260,8 +290,8 @@ void ATM::exitProgram() {
     std::exit(0);
 }
 
+// Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
 void clearScreen() {
-    // Source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
     std::cout << "\033[2J\033[1;1H";
 }
 

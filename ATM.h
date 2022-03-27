@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <vector>
-#include <ctime>
+#include <random>
 #include <string>
 #include <cstdarg>
 #include "User.h"
@@ -23,19 +23,21 @@ class ATM {
         void deposit();
         void withdraw();
         void getInformation();
+        void getNumberOfUsers();
+
+        std::string createRandomID(); // source: https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
         void logOut();
         void exitProgram();
         void miniMenu1();
-        bool isDuplicateId(const unsigned long int& id);
+        bool isDuplicateId(const std::string& id);
         void tryAgainMenu();
-        void getNumberOfUsers();
 
     public:
-        // ATM(ATMUser* user = nullptr);
         ATM(ATMUser* s, ...);
+        ~ATM();
 };
 
-void clearScreen();
+void clearScreen(); // source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
 bool isNumber(const std::string& str); // source: https://www.delftstack.com/howto/cpp/how-to-determine-if-a-string-is-number-cpp/
 bool isFourDigit(unsigned int pin);
 

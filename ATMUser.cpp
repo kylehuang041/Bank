@@ -1,8 +1,8 @@
 #include "ATMUser.h"
-#include <cmath>
-#include <string>
 
-ATMUser::ATMUser(const std::string& name, const std::string& phone, const unsigned long int& id, const unsigned int& pin, const long double& balance) : User(name, phone) {
+ATMUser::ATMUser(const std::string& name, const std::string& phone,
+const std::string& id, const std::string& pin, const long double& balance)
+: User(name, phone) {
     this->id = id;
     this->pin = pin;
     this->balance = balance;
@@ -10,13 +10,13 @@ ATMUser::ATMUser(const std::string& name, const std::string& phone, const unsign
 
 ATMUser::~ATMUser() {}
 
-unsigned long int& ATMUser::getId() { return this->id; }
+const std::string& ATMUser::getId() { return this->id; }
 
-void ATMUser::setId(const unsigned long int& id) { this->id = id; }
+void ATMUser::setId(const std::string& id) { this->id = id; }
 
-unsigned int& ATMUser::getPin() { return this->pin; }
+const std::string& ATMUser::getPin() { return this->pin; }
 
-void ATMUser::setPin(const unsigned int& pin) { this->pin = pin; }
+void ATMUser::setPin(const std::string& pin) { this->pin = pin; }
 
 std::string ATMUser::getBalance() {
     std::string temp = std::to_string(this->balance);

@@ -39,6 +39,5 @@ class ATM {
 
 void clearScreen(); // source for clearing terminal: https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
 bool isNumber(const std::string& str); // source: https://www.delftstack.com/howto/cpp/how-to-determine-if-a-string-is-number-cpp/
-bool isFourDigit(unsigned int pin);
 
 #endif

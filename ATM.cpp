@@ -155,7 +155,7 @@ void ATM::createAccount(ATMUser* user) {
         }
         std::cout << "Enter your 4-digit number pin: ";
         while (std::cin >> pin) {
-            if (isNumber(pin) && isFourDigit(std::stoi(pin))) break;
+            if (isNumber(pin) && pin.length() == 4) break;
             else std::cout << "Enter only 4 integers for pin number: ";
         }
 
@@ -298,15 +298,6 @@ void clearScreen() {
 // source: https://www.delftstack.com/howto/cpp/how-to-determine-if-a-string-is-number-cpp/
 bool isNumber(const std::string& str) {
     return str.find_first_not_of("0123456789") == std::string::npos;
-}
-
-bool isFourDigit(unsigned int pin) {
-    int counter = 0;
-    while (pin > 0) {
-        pin /= 10;
-        ++counter;
-    }
-    return (counter == 4);
 }
 
 int ATM::numberOfUsers = 0;

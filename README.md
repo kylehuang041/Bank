@@ -13,6 +13,3 @@ g++-11 Installation: https://lindevs.com/install-g-on-ubuntu</b>
 * Type ./program to run the program.<br>
 * type "make && ./program" to recompile and execute program if there is an error.<br>
 * type "make clean" to remove all object files.<br>
-
-## Other
-I used C++.

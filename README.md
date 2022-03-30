@@ -15,4 +15,4 @@ g++-11 Installation: https://lindevs.com/install-g-on-ubuntu</b>
 * type "make clean" to remove all object files.<br>
 
 ## Other
-I created the program using C++ and made a makefile for multicompilation.
+I used C++.

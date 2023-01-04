@@ -1,17 +1,5 @@
-program: Main.o User.o ATMUser.o ATM.o
-	g++-11 Main.o User.o ATMUser.o ATM.o -o program
-
-Main.o: Main.cpp
-	g++-11 -c Main.cpp
-
-User.o: User.cpp
-	g++-11 -c User.cpp
-
-ATMUser.o: ATMUser.cpp
-	g++-11 -c ATMUser.cpp
-
-ATM.o: ATM.cpp
-	g++-11 -c ATM.cpp
+compileAll: Main.cpp User/User.cpp ATM/ATMUser.cpp ATM/ATM.cpp
+	g++-11 Main.cpp User/User.cpp ATM/ATMUser.cpp ATM/ATM.cpp -o program
 
 clean:
-	rm *.o
+	rm program

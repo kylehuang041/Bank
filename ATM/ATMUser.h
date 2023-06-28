@@ -15,7 +15,7 @@ class ATMUser : public User {
 	std::vector<std::string> summary;
 
 public:
-	ATMUser(const std::string &name, const std::string &phone, const std::string &id, const std::string &pin = "1234", const long double &balance = 0);
+	ATMUser(const std::string &name, const std::string &phone, const std::string &id, const std::string &pin, const long double &balance = 0);
 	~ATMUser();
 	const std::string &getId();
 	void setId(const std::string &id);
